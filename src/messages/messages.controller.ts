@@ -21,7 +21,7 @@ import { IDataService } from 'src/core/repositories/interfaces/dataservice.inter
 export class MessagesController {
   constructor(
     private readonly logger: CustomLogger,
-    @Inject(IDataService) private readonly dataservice: IDataService,
+    private readonly dataservice: IDataService,
   ) {}
   @Get()
   listMessages() {
