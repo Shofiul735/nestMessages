@@ -9,9 +9,8 @@ async function bootstrap() {
   const app = await NestFactory.create(MessagesModule);
 
   const customLogger = app.get(CustomLogger);
-  const reflector = app.get(Reflector);
 
-  app.useGlobalFilters(new HttpExceptionFilter(customLogger, reflector));
+  app.useGlobalFilters(new HttpExceptionFilter(customLogger));
   app.useGlobalPipes(new ValidationPipe());
   await app.listen(3000);
 }

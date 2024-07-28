@@ -11,12 +11,13 @@ export class CustomLogger implements LoggerService {
       level: 'info',
       format: winston.format.combine(
         winston.format.timestamp(),
-        winston.format.printf(({ timestamp, level, message, context }) => {
-          return `${timestamp} [${level}] ${context}: ${message}`;
-        }),
+        winston.format.printf(
+          ({ timestamp, level, message, context, trace }) => {
+            return `${timestamp} [${level}] ${context}: ${message} ${trace}`;
+          },
+        ),
       ),
       transports: [
-        new winston.transports.Console(),
         new winston.transports.DailyRotateFile({
           filename: 'logs/error-%DATE%.log',
           datePattern: 'YYYY-MM-DD',
