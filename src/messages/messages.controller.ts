@@ -1,14 +1,30 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Get,
+  InternalServerErrorException,
+  NotFoundException,
+  Post,
+} from '@nestjs/common';
+import { CreateMessageDto } from './dtos/create-messsage.dto';
+import { CustomLogger } from 'src/core/logger/logger.service';
 
 @Controller('/messages')
 export class MessagesController {
+  constructor(private readonly logger: CustomLogger) {}
+
   @Get()
   listMessages() {
-    return [];
+    throw new InternalServerErrorException('You fucked up!');
   }
   @Post()
-  createMessage(message: string) {
-    return '';
+  createMessage(@Body() body: CreateMessageDto) {
+    try {
+      throw new BadRequestException();
+    } catch (ex) {
+      throw ex;
+    }
   }
   @Get('/:id')
   getMessage() {
